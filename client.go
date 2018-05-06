@@ -4,9 +4,14 @@ import (
 	"net/http"
 )
 
+var (
+	opt        *Options
+	httpClient *http.Client
+)
+
 type Client struct {
-	opt *Options
 	*http.Client
+	Account Account
 }
 
 func NewPracticeClient(token AuthToken, id ClientId) (*Client, error) {
@@ -19,12 +24,10 @@ func NewTradeClient(token AuthToken, id ClientId) (*Client, error) {
 
 func newClient(token AuthToken, id ClientId, clientMode int) (*Client, error) {
 	apiMode, err := newApiMode(clientMode)
-	opt := newOptions(token, id, apiMode)
+	opt = newOptions(token, id, apiMode)
+	httpClient = http.DefaultClient
 
 	// TODO: create methods to create Client with non-default http.Client
-	client := &Client{
-		opt:    opt,
-		Client: http.DefaultClient,
-	}
+	client := &Client{}
 	return client, err
 }

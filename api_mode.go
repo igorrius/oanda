@@ -35,7 +35,3 @@ func newApiMode(modeType int) (*ApiMode, error) {
 
 	return &ApiMode{url: apiUrl}, nil
 }
-
-func (am ApiMode) GetUrl() string {
-	return am.url
-}
