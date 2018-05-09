@@ -6,12 +6,19 @@ import (
 )
 
 const (
-	accountSummaryUrlPattern     = "/accounts/%s/summary"
-	accountInstrumentsUrlPattern = "/accounts/%s/instruments"
+	accountBaseUrl              = "/accounts/%s"
+	accountSummaryUrlSuffix     = "/summary"
+	accountInstrumentsUrlSuffix = "/instruments"
 )
 
 type Account struct {
-	Api
+	Request
+	RequestTools
+}
+
+func (a Account) getUrl(suffix string) string {
+	url := fmt.Sprintf(accountBaseUrl, opt.auth.ClientId)
+	return url + suffix
 }
 
 /*
@@ -19,8 +26,8 @@ Get summary for AccountResponse
 /accounts/{accountID}/summary
 */
 func (a Account) Summary() (*v20.AccountResponse, error) {
-	url := fmt.Sprintf(accountSummaryUrlPattern, opt.auth.ClientId)
-	request, err := a.newRequest("GET", url)
+	url := a.getUrl(accountSummaryUrlSuffix)
+	request, err := a.newRequest(RequestMethodGet, url)
 	if err != nil {
 		return nil, err
 	}
@@ -33,9 +40,13 @@ func (a Account) Summary() (*v20.AccountResponse, error) {
 	return account, err
 }
 
+/*
+Get instruments for AccountResponse
+/accounts/{accountID}/instruments
+*/
 func (a Account) Instruments() (*v20.InstrumentsResponse, error) {
-	url := fmt.Sprintf(accountInstrumentsUrlPattern, opt.auth.ClientId)
-	request, err := a.newRequest("GET", url)
+	url := a.getUrl(accountInstrumentsUrlSuffix)
+	request, err := a.newRequest(RequestMethodGet, url)
 	if err != nil {
 		return nil, err
 	}

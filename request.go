@@ -7,10 +7,14 @@ import (
 	"net/http"
 )
 
-type Api struct {
+const (
+	RequestMethodGet = "GET"
+)
+
+type Request struct {
 }
 
-func (Api) newRequest(method string, apiMethodUrl string) (*http.Request, error) {
+func (Request) newRequest(method string, apiMethodUrl string) (*http.Request, error) {
 	requestUrl := opt.mode.url + apiMethodUrl
 	r, err := http.NewRequest(method, requestUrl, nil)
 	if err != nil {
@@ -21,7 +25,10 @@ func (Api) newRequest(method string, apiMethodUrl string) (*http.Request, error)
 	return r, nil
 }
 
-func (Api) unmarshalFromRequest(request *http.Request, v interface{}) error {
+type RequestTools struct {
+}
+
+func (RequestTools) unmarshalFromRequest(request *http.Request, v interface{}) error {
 	response, err := httpClient.Do(request)
 	if err != nil {
 		return err
