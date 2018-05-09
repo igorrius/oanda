@@ -28,7 +28,7 @@ func (Request) newRequest(method string, apiMethodUrl string) (*http.Request, er
 type RequestTools struct {
 }
 
-func (RequestTools) unmarshalFromRequest(request *http.Request, v interface{}) error {
+func (RequestTools) unmarshalFromResponse(request *http.Request, v interface{}) error {
 	response, err := httpClient.Do(request)
 	if err != nil {
 		return err

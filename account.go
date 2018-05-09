@@ -33,7 +33,7 @@ func (a Account) Summary() (*v20.AccountResponse, error) {
 	}
 
 	account := &v20.AccountResponse{}
-	if err := a.unmarshalFromRequest(request, account); err != nil {
+	if err := a.unmarshalFromResponse(request, account); err != nil {
 		return nil, err
 	}
 
@@ -52,7 +52,7 @@ func (a Account) Instruments() (*v20.InstrumentsResponse, error) {
 	}
 
 	instruments := &v20.InstrumentsResponse{}
-	if err := a.unmarshalFromRequest(request, instruments); err != nil {
+	if err := a.unmarshalFromResponse(request, instruments); err != nil {
 		return nil, err
 	}
 
