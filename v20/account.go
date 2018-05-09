@@ -2,7 +2,7 @@ package v20
 
 import "time"
 
-type AccountSummary struct {
+type AccountResponse struct {
 	Account struct {
 		GuaranteedStopLossOrderMode string    `json:"guaranteedStopLossOrderMode"`
 		ID                          string    `json:"id"`
@@ -37,5 +37,23 @@ type AccountSummary struct {
 		MarginCallMarginUsed        string    `json:"marginCallMarginUsed"`
 		MarginCallPercent           string    `json:"marginCallPercent"`
 	} `json:"account"`
+	LastTransactionID string `json:"lastTransactionID"`
+}
+
+type InstrumentsResponse struct {
+	Instruments []struct {
+		Name                        string `json:"name"`
+		Type                        string `json:"type"`
+		DisplayName                 string `json:"displayName"`
+		PipLocation                 int    `json:"pipLocation"`
+		DisplayPrecision            int    `json:"displayPrecision"`
+		TradeUnitsPrecision         int    `json:"tradeUnitsPrecision"`
+		MinimumTradeSize            string `json:"minimumTradeSize"`
+		MaximumTrailingStopDistance string `json:"maximumTrailingStopDistance"`
+		MinimumTrailingStopDistance string `json:"minimumTrailingStopDistance"`
+		MaximumPositionSize         string `json:"maximumPositionSize"`
+		MaximumOrderUnits           string `json:"maximumOrderUnits"`
+		MarginRate                  string `json:"marginRate"`
+	} `json:"instruments"`
 	LastTransactionID string `json:"lastTransactionID"`
 }
