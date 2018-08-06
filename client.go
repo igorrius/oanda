@@ -11,7 +11,8 @@ var (
 
 type Client struct {
 	*http.Client
-	Account Account
+	Account    Account
+	Instrument Instrument
 }
 
 func NewPracticeClient(token AuthToken, id ClientId) (*Client, error) {
